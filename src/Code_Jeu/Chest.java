@@ -7,7 +7,6 @@ public class Chest {
     private int value;
 
     public Chest(int CaveId) {
-
         switch (CaveId)
         {
             case 1:
