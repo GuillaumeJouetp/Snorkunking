@@ -284,6 +284,7 @@ public class Snorkunking extends BasicGame {
         if (step==4){
             graphics.setColor(Color.orange);
             graphics.drawRect(10,150,680,540);
+
         }
     }
 }
