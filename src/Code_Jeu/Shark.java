@@ -13,6 +13,7 @@ public class Shark {
     }
 
     public void movementshark(){
+
         x+=1;
 
         if (p==0){

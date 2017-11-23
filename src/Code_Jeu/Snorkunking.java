@@ -24,7 +24,7 @@ public class Snorkunking extends BasicGame {
 
     private  Money fastCoin;
     private  Money regularCoin ;
-    private  Money lowCoin;
+    private  Money slowCoin;
 
     private Diver step12Diver;
 
@@ -45,7 +45,7 @@ public class Snorkunking extends BasicGame {
 
         fastCoin = new Money(4);
         regularCoin = new Money(2);
-        lowCoin = new Money(1);
+        slowCoin = new Money(1);
 
         initMusicMenu();
         initImageMenu();
@@ -58,9 +58,9 @@ public class Snorkunking extends BasicGame {
 
         step2(gameContainer); // Menu (chose 1 or 2 players)
 
-        step3(gameContainer);
+        step3(gameContainer); // Game
 
-        step4(gameContainer);
+        step4(gameContainer); // End game and Score pannel
 
     }
 
@@ -113,7 +113,7 @@ public class Snorkunking extends BasicGame {
     public void money(){
         fastCoin.setY(fastCoin.getY()+fastCoin.getSpeed());
         regularCoin.setY(regularCoin.getY()+regularCoin.getSpeed());
-        lowCoin.setY(lowCoin.getY()+lowCoin.getSpeed());
+        slowCoin.setY(slowCoin.getY()+slowCoin.getSpeed());
 
 
         if (fastCoin.getY() > HEIGHT +50) {
@@ -122,8 +122,8 @@ public class Snorkunking extends BasicGame {
         if (regularCoin.getY() > HEIGHT +50) {
             regularCoin.setY(-30);
         }
-        if (lowCoin.getY() > HEIGHT +50) {
-            lowCoin.setY(-30);
+        if (slowCoin.getY() > HEIGHT +50) {
+            slowCoin.setY(-30);
         }
     }
 
@@ -184,11 +184,11 @@ public class Snorkunking extends BasicGame {
             goldTreasure.draw(400,550,500,300);
             money.draw(10,fastCoin.getY()-10,30,30);
             money.draw(100,regularCoin.getY()-30,30,30);
-            money.draw(170,lowCoin.getY()-80,30,30);
+            money.draw(170,slowCoin.getY()-80,30,30);
             money.draw(250,regularCoin.getY()-40,30,30);
-            money.draw(300,lowCoin.getY()-100,30,30);
+            money.draw(300,slowCoin.getY()-100,30,30);
             money.draw(400,fastCoin.getY()-50,30,30);
-            money.draw(430,lowCoin.getY()-10,30,30);
+            money.draw(430,slowCoin.getY()-10,30,30);
             money.draw(510,regularCoin.getY()-60,30,30);
             money.draw(600,fastCoin.getY()-70,30,30);
             money.draw(660,regularCoin.getY()-10,30,30);
