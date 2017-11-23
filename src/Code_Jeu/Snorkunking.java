@@ -12,23 +12,23 @@ public class Snorkunking extends BasicGame {
 
     private int step; // To situate code to execute
 
-    private Image fond, shark, diver, title, blood, tresor, money, enter, divergauche, pad, flechedroite, flechegauche;
+    private Image fond, shark, diver, title, blood, goldTreasure, money, enter, leftSideDiver, pad, rightIndication, leftIndication;
 
     private Music music1;
     private Sound sound1;
 
-    private int sharkX=-400;
-    private double sharkY=120;
-    private int diverX=300;
-    private int diverY=400;
-    private int pieceY1=0;
-    private int pieceY2=0;
-    private int pieceY3=0;
     private int titleY=-400;
-    private int mort=0;
+    private int death=0;
     private int diverpos=0;
-    private int p=0;
     private int Pad=1;
+
+    private  Money fastCoin;
+    private  Money regularCoin ;
+    private  Money lowCoin;
+
+    private Diver step12Diver;
+
+    private Shark step1Shark;
 
     List<Cave> caves = new ArrayList<>();
     List<Diver> divers = new ArrayList<>();
@@ -39,9 +39,17 @@ public class Snorkunking extends BasicGame {
 
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
+        step=1;
+        step1Shark = new Shark(-400,120);
+        step12Diver = new Diver(300,400,"Step 1&2 diver");
+
+        fastCoin = new Money(4);
+        regularCoin = new Money(2);
+        lowCoin = new Money(1);
+
         initMusicMenu();
         initImageMenu();
-        step=1;
+
     }
 
     @Override
@@ -90,49 +98,32 @@ public class Snorkunking extends BasicGame {
         fond = new Image("res/image/ocean.jpg");
         shark = new Image("res/image/shark.png");
         diver = new Image("res/image/diver.png");
-        title = new Image("res/image/titre.png");
+        title = new Image("res/image/title.png");
         blood = new Image("res/image/blood.png");
-        tresor = new Image("res/image/tresor.png");
+        goldTreasure = new Image("res/image/goldTreasure.png");
         money = new Image("res/image/money.png");
         enter = new Image("res/image/enter.png");
-        divergauche =  new Image ("res/image/divergauche.jpg");
+        leftSideDiver =  new Image ("res/image/leftSideDiver.jpg");
         pad = new Image("res/image/pad.png");
-        flechedroite =  new Image ("res/image/flechedroite.png");
-        flechegauche =  new Image ("res/image/flechegauche.png");
+        rightIndication =  new Image ("res/image/rightIndication.png");
+        leftIndication =  new Image ("res/image/leftIndication.png");
     }
 
-    public void movementshark(){
-        sharkX+=1;
 
-        if (p==0){
-            sharkY+=0.3;
-            if(sharkY>=140){
-                p=1;
-            }
-        }
-        if (p==1){
-            sharkY+=-0.3;
-            if (sharkY<=100){
-                p=0;
-            }
-        }
-        if (sharkX > WIDTH + 200) {
-            sharkX = -300;
-        }
-    }
     public void money(){
-        pieceY1+=4;
-        pieceY2+=2;
-        pieceY3+=1;
+        fastCoin.setY(fastCoin.getY()+fastCoin.getSpeed());
+        regularCoin.setY(regularCoin.getY()+regularCoin.getSpeed());
+        lowCoin.setY(lowCoin.getY()+lowCoin.getSpeed());
 
-        if (pieceY1 > HEIGHT +50) {
-            pieceY1 = -100;
+
+        if (fastCoin.getY() > HEIGHT +50) {
+            fastCoin.setY(-100);
         }
-        if (pieceY2 > HEIGHT +50) {
-            pieceY2 = -30;
+        if (regularCoin.getY() > HEIGHT +50) {
+            regularCoin.setY(-30);
         }
-        if (pieceY3 > HEIGHT +50) {
-            pieceY3 = -30;
+        if (lowCoin.getY() > HEIGHT +50) {
+            lowCoin.setY(-30);
         }
     }
 
@@ -141,21 +132,21 @@ public class Snorkunking extends BasicGame {
         Input input = gameContainer.getInput();
 
         if (input.isKeyDown(Input.KEY_DOWN)) {
-            diverY += 1;
+            step12Diver.setY(step12Diver.getY()+1);
             Pad=0;
         }
         if (input.isKeyDown(Input.KEY_UP)) {
-            diverY += -1;
+            step12Diver.setY(step12Diver.getY()-1);
             Pad=0;
         }
         if (input.isKeyDown(Input.KEY_RIGHT)) {
             diverpos=0;
-            diverX += 1;
+            step12Diver.setX(step12Diver.getX()+1);
             Pad=0;
         }
         if (input.isKeyDown(Input.KEY_LEFT)) {
             diverpos=1;
-            diverX += -1;
+            step12Diver.setX(step12Diver.getX()-1);
             Pad=0;
         }
     }
@@ -167,55 +158,55 @@ public class Snorkunking extends BasicGame {
             if (titleY <= 230) {
                 titleY += 4;
             }
-            movementshark();
+            step1Shark.movementshark();
 
             money();
 
-            if (mort == 0) {
+            if (death == 0) {
                 //mouvement du diver//
                 updateDiverStep01(gameContainer);
 
-                if (sharkX > diverX && sharkX < diverX + 100 && sharkY > diverY && sharkY < diverY + 50) {
+                if (step1Shark.getX() > step12Diver.getX() && step1Shark.getX() < step12Diver.getX() + 100 && step1Shark.getY() > step12Diver.getY() && step1Shark.getY() < step12Diver.getY() + 50) {
                     sound1.play(1.0f, 0.2f);
-                    mort = 1;
+                    death = 1;
                 }
             }
             if (input.isKeyDown(Input.KEY_ENTER)) {
-                diverX = 345;
-                diverY = 125;
+                step12Diver.setX(345);
+                step12Diver.setY(125);
                 step = 2;
             }
         }
     }
     public void step1draw(Graphics graphics){
         if (step==1) {
-            tresor.draw(-100,550,500,300);
-            tresor.draw(400,550,500,300);
-            money.draw(10,pieceY1-10,30,30);
-            money.draw(100,pieceY2-30,30,30);
-            money.draw(170,pieceY3-80,30,30);
-            money.draw(250,pieceY2-40,30,30);
-            money.draw(300,pieceY3-100,30,30);
-            money.draw(400,pieceY1-50,30,30);
-            money.draw(430,pieceY3-10,30,30);
-            money.draw(510,pieceY2-60,30,30);
-            money.draw(600,pieceY1-70,30,30);
-            money.draw(660,pieceY2-10,30,30);
+            goldTreasure.draw(-100,550,500,300);
+            goldTreasure.draw(400,550,500,300);
+            money.draw(10,fastCoin.getY()-10,30,30);
+            money.draw(100,regularCoin.getY()-30,30,30);
+            money.draw(170,lowCoin.getY()-80,30,30);
+            money.draw(250,regularCoin.getY()-40,30,30);
+            money.draw(300,lowCoin.getY()-100,30,30);
+            money.draw(400,fastCoin.getY()-50,30,30);
+            money.draw(430,lowCoin.getY()-10,30,30);
+            money.draw(510,regularCoin.getY()-60,30,30);
+            money.draw(600,fastCoin.getY()-70,30,30);
+            money.draw(660,regularCoin.getY()-10,30,30);
 
 
-            if (mort==0) {
+            if (death==0) {
                 if (diverpos==0) {
-                    diver.draw(diverX, diverY, 100, 50);
+                    diver.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
                 }
                 if (diverpos==1){
-                    divergauche.draw(diverX, diverY, 100, 50);
+                    leftSideDiver.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
                 }
             }
-            if (mort==1){
-                blood.draw(diverX, diverY, 100, 50);
+            if (death==1){
+                blood.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
             }
             title.draw(75,titleY,550,130);
-            shark.draw(sharkX - 150,(int)sharkY - 60,200,100);
+            shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
             if (titleY>=230) {
                 graphics.setColor(Color.cyan);
                 graphics.drawRect(WIDTH / 2 - 110, 475, 220, 42);
@@ -227,11 +218,11 @@ public class Snorkunking extends BasicGame {
     //choisir options de jeu//
     public void diverChoiceGame(){
         //jouer contre l'ordi//
-        if(diverX>465 && diverX<595 && diverY>355 && diverY<405){
+        if(step12Diver.getX()>465 && step12Diver.getX()<595 && step12Diver.getY()>355 && step12Diver.getY()<405){
             step=4;
         }
         //jouer contre un autre joueur//
-        if(diverX>75 && diverX<205 && diverY>355 && diverY<405) {
+        if(step12Diver.getX()>75 && step12Diver.getX()<205 && step12Diver.getY()>355 && step12Diver.getY()<405) {
             step=3;
         }
     }
@@ -254,16 +245,16 @@ public class Snorkunking extends BasicGame {
             graphics.drawString("2 Player", 120, 370);
 
             if (diverpos==0) {
-                diver.draw(diverX-50, diverY-25, 100, 50);
+                diver.draw(step12Diver.getX()-50, step12Diver.getY()-25, 100, 50);
             }
             if (diverpos==1){
-                divergauche.draw(diverX-50, diverY-25, 100, 50);
+                leftSideDiver.draw(step12Diver.getX()-50, step12Diver.getY()-25, 100, 50);
             }
             if (Pad==1){
-                flechedroite.draw(345,150,150,200);
-                flechegauche.draw(195,150,150,200);
+                rightIndication.draw(345,150,150,200);
+                leftIndication.draw(195,150,150,200);
                 pad.draw(225,450,250,150);
-                graphics.drawString("Utilisez les flèches pour bouger le diver",160,610);
+                graphics.drawString("Use arrow keys to move the diver",200,610);
             }
         }
     }
