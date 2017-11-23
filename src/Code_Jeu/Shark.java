@@ -33,18 +33,18 @@ public class Shark {
 
         if (p==0){
             y+=0.3;
-            if(y>=140){
+            if(y>=14*Snorkunking.HEIGHT/70){
                 p=1;
             }
         }
         if (p==1){
             y+=-0.3;
-            if (y<=100){
+            if (y<=Snorkunking.HEIGHT/7){
                 p=0;
             }
         }
-        if (x > Snorkunking.WIDTH + 200) {
-            x = -300;
+        if (x > Snorkunking.WIDTH + 2*Snorkunking.WIDTH/7) {
+            x = -3*Snorkunking.WIDTH/7;
         }
     }
 
