@@ -8,12 +8,16 @@ import org.newdawn.slick.SlickException;
 public class Diver {
     private int x;
     private int y;
+    private int width;
+    private int height;
     private String name;
     private int score;
 
-    public Diver(int x, int y, String name) {
+    public Diver(int x, int y, int width,int height, String name) {
         this.x = x;
         this.y = y;
+        this.width=width;
+        this.height=height;
         this.name = name;
     }
 
@@ -36,5 +40,13 @@ public class Diver {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

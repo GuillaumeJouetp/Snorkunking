@@ -41,7 +41,7 @@ public class Snorkunking extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         step=1;
         step1Shark = new Shark(-400,120,200,100);
-        step12Diver = new Diver(300,400,"Step 1&2 diver");
+        step12Diver = new Diver(300,400,100,50,"Step 1&2 diver");
 
         fastCoin = new Money(4);
         regularCoin = new Money(2);
@@ -197,18 +197,19 @@ public class Snorkunking extends BasicGame {
 
             if (death==0) {
                 if (diverpos==0) {
-                    diver.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
+                    diver.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
                 }
                 if (diverpos==1){
-                    leftSideDiver.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
+                    leftSideDiver.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
                 }
             }
             if (death==1){
-                blood.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
+                blood.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
             }
             title.draw(75,titleY,550,130);
             //shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
             step1Shark.drawShark();
+
             if (titleY>=230) {
                 graphics.setColor(Color.cyan);
                 graphics.drawRect(WIDTH / 2 - 110, 475, 220, 42);
@@ -247,10 +248,10 @@ public class Snorkunking extends BasicGame {
             graphics.drawString("1 Player", 110, 370);
 
             if (diverpos==0) {
-                diver.draw(step12Diver.getX()-50, step12Diver.getY()-25, 100, 50);
+                diver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
             }
             if (diverpos==1){
-                leftSideDiver.draw(step12Diver.getX()-50, step12Diver.getY()-25, 100, 50);
+                leftSideDiver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
             }
             if (Pad==1){
                 rightIndication.draw(345,150,150,200);
