@@ -1,7 +1,7 @@
 package Code_Jeu;
 
 public class Shark {
-
+    //ce truc ne sert à rien en vrai
     private int x ;
     private double y ;
     private int p;
