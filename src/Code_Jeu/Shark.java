@@ -10,6 +10,7 @@ public class Shark {
         this.x = x;
         this.y = y;
         p=0;
+
     }
 
     public void movementshark(){
