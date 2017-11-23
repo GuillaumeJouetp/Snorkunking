@@ -1,16 +1,27 @@
 package Code_Jeu;
 
+import org.newdawn.slick.*;
+import org.newdawn.slick.SlickException;
+
+
+
 public class Shark {
 
-    //test guillaume
+
 
     private int x ;
     private double y ;
     private int p;
+    private int width;
+    private int height;
 
-    public Shark(int x, double y) {
+
+
+    public Shark(int x, double y, int width, int height) {
         this.x = x;
         this.y = y;
+        this.width = width;
+        this.height = height;
         p=0;
 
     }
@@ -44,4 +55,9 @@ public class Shark {
         return y;
     }
 
+    public void drawShark() throws SlickException{
+
+        Image shark = new Image("res/image/shark.png");
+        shark.draw(x - 150,(int)(y - 60),width,height);
+    }
 }

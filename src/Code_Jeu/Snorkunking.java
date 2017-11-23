@@ -12,7 +12,7 @@ public class Snorkunking extends BasicGame {
 
     private int step; // To situate code to execute
 
-    private Image fond, shark, diver, title, blood, goldTreasure, money, enter, leftSideDiver, pad, rightIndication, leftIndication;
+    private Image fond, diver, title, blood, goldTreasure, money, enter, leftSideDiver, pad, rightIndication, leftIndication;
 
     private Music music1;
     private Sound sound1;
@@ -40,7 +40,7 @@ public class Snorkunking extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         step=1;
-        step1Shark = new Shark(-400,120);
+        step1Shark = new Shark(-400,120,200,100);
         step12Diver = new Diver(300,400,"Step 1&2 diver");
 
         fastCoin = new Money(4);
@@ -58,9 +58,9 @@ public class Snorkunking extends BasicGame {
 
         step2(gameContainer); // Menu (chose 1 or 2 players)
 
-        step3(gameContainer); // Game
+        step3(gameContainer); // Game with 2 player
 
-        step4(gameContainer); // End game and Score pannel
+        step4(gameContainer); // Game with 1 player
 
     }
 
@@ -96,7 +96,7 @@ public class Snorkunking extends BasicGame {
 
     public void initImageMenu() throws SlickException {
         fond = new Image("res/image/ocean.jpg");
-        shark = new Image("res/image/shark.png");
+
         diver = new Image("res/image/diver.png");
         title = new Image("res/image/title.png");
         blood = new Image("res/image/blood.png");
@@ -178,10 +178,10 @@ public class Snorkunking extends BasicGame {
             }
         }
     }
-    public void step1draw(Graphics graphics){
+    public void step1draw(Graphics graphics) throws SlickException {
         if (step==1) {
-            goldTreasure.draw(-100,550,500,300);
-            goldTreasure.draw(400,550,500,300);
+            goldTreasure.draw(-200,550,500,300);
+            goldTreasure.draw(300,550,500,300);
             money.draw(10,fastCoin.getY()-10,30,30);
             money.draw(100,regularCoin.getY()-30,30,30);
             money.draw(170,slowCoin.getY()-80,30,30);
@@ -206,7 +206,8 @@ public class Snorkunking extends BasicGame {
                 blood.draw(step12Diver.getX(), step12Diver.getY(), 100, 50);
             }
             title.draw(75,titleY,550,130);
-            shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
+            //shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
+            step1Shark.drawShark();
             if (titleY>=230) {
                 graphics.setColor(Color.cyan);
                 graphics.drawRect(WIDTH / 2 - 110, 475, 220, 42);
