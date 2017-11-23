@@ -40,8 +40,8 @@ public class Snorkunking extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         step=1;
-        step1Shark = new Shark(-400,120,200,100);
-        step12Diver = new Diver(300,400,100,50,"Step 1&2 diver");
+        step1Shark = new Shark(-400,HEIGHT/7,WIDTH/3,HEIGHT/7);
+        step12Diver = new Diver(WIDTH/2,HEIGHT-2*HEIGHT/5,WIDTH/7,HEIGHT/14,"Step 1&2 diver");
 
         fastCoin = new Money(4);
         regularCoin = new Money(2);
@@ -166,8 +166,8 @@ public class Snorkunking extends BasicGame {
                 //mouvement du diver//
                 updateDiverStep01(gameContainer);
 
-                if (step1Shark.getX() > step12Diver.getX() && step1Shark.getX() < step12Diver.getX() + 100 && step1Shark.getY() > step12Diver.getY() && step1Shark.getY() < step12Diver.getY() + 50) {
-                    sound1.play(1.0f, 0.2f);
+                if (step1Shark.getX() > step12Diver.getX()-step12Diver.getX()/4 && step1Shark.getX() < step12Diver.getX()+step12Diver.getX()/4  && step1Shark.getY() > step12Diver.getY()-step12Diver.getY()/4 && step1Shark.getY() < step12Diver.getY()+step12Diver.getY()/4) {
+                    sound1.play(1.0f, 0.3f);
                     death = 1;
                 }
             }
@@ -197,16 +197,16 @@ public class Snorkunking extends BasicGame {
 
             if (death==0) {
                 if (diverpos==0) {
-                    diver.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
+                    diver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
                 }
                 if (diverpos==1){
-                    leftSideDiver.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
+                    leftSideDiver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
                 }
             }
             if (death==1){
-                blood.draw(step12Diver.getX(), step12Diver.getY(), step12Diver.getWidth(), step12Diver.getHeight());
+                blood.draw(step12Diver.getX()-step12Diver.getX()/4, step12Diver.getY()-step12Diver.getY()/4, step12Diver.getWidth(), step12Diver.getHeight());
             }
-            title.draw(75,titleY,550,130);
+            title.draw(3*WIDTH/20,titleY,7*WIDTH/10,HEIGHT/5);
             //shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
             step1Shark.drawShark();
 
