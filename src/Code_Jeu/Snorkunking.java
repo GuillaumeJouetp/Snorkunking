@@ -175,6 +175,7 @@ public class Snorkunking extends BasicGame {
                 step12Diver.setX(345);
                 step12Diver.setY(125);
                 step = 2;
+                Pad=1;
             }
         }
     }
@@ -220,7 +221,7 @@ public class Snorkunking extends BasicGame {
     public void diverChoiceGame(){
         //jouer contre l'ordi//
         if(step12Diver.getX()>465 && step12Diver.getX()<595 && step12Diver.getY()>355 && step12Diver.getY()<405){
-            step=4;
+            step=3;
         }
         //jouer contre un autre joueur//
         if(step12Diver.getX()>75 && step12Diver.getX()<205 && step12Diver.getY()>355 && step12Diver.getY()<405) {
@@ -241,9 +242,9 @@ public class Snorkunking extends BasicGame {
         if (step==2){
             graphics.setColor(Color.white);
             graphics.drawRect(465, 355, 150, 50);
-            graphics.drawString("1 Player", 530, 370);
+            graphics.drawString("2 Player", 500, 370);
             graphics.drawRect(75, 355, 150, 50);
-            graphics.drawString("2 Player", 120, 370);
+            graphics.drawString("1 Player", 110, 370);
 
             if (diverpos==0) {
                 diver.draw(step12Diver.getX()-50, step12Diver.getY()-25, 100, 50);
