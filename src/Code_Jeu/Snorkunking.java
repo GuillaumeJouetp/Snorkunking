@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Snorkunking extends BasicGame {
 
-    public static int WIDTH = 700;
-    public static int HEIGHT = 700 ;
+    public static int WIDTH = 1000;
+    public static int HEIGHT = 1000 ;
 
     private int step; // To situate code to execute
 
