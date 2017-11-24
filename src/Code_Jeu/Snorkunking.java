@@ -271,7 +271,7 @@ public class Snorkunking extends BasicGame {
     public void step3draw(Graphics graphics){
         if (step==3){
             graphics.setColor(Color.green);
-            graphics.drawRect(1*WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
         }
     }
     public void step4(GameContainer gameContainer){
@@ -283,7 +283,7 @@ public class Snorkunking extends BasicGame {
     public void step4draw(Graphics graphics){
         if (step==4){
             graphics.setColor(Color.orange);
-            graphics.drawRect(1*WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
 
         }
     }
