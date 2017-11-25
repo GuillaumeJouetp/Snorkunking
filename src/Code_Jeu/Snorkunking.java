@@ -1,7 +1,13 @@
 package Code_Jeu;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.gui.TextField;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +34,15 @@ public class Snorkunking extends BasicGame {
 
     private Diver step12Diver;
 
+    private TextField choiceNamePlayer;
+
     private Shark step1Shark;
+
+    private int caveX;
+    private int caveY;
+    private int caveWidth;
+    private int caveHeight;
+
 
     List<Cave> caves = new ArrayList<>();
     List<Diver> divers = new ArrayList<>();
@@ -197,14 +211,15 @@ public class Snorkunking extends BasicGame {
 
             if (death==0) {
                 if (diverpos==0) {
-                    diver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
+                    diver.draw(step12Diver.getX() - step12Diver.getWidth() / 2, step12Diver.getY() - step12Diver.getHeight() / 2, step12Diver.getWidth(), step12Diver.getHeight());
+
                 }
-                if (diverpos==1){
-                    leftSideDiver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
+                if (diverpos==1) {
+                    leftSideDiver.draw(step12Diver.getX() - step12Diver.getWidth() / 2, step12Diver.getY() - step12Diver.getHeight() / 2, step12Diver.getWidth(), step12Diver.getHeight());
                 }
             }
             if (death==1){
-                blood.draw(step12Diver.getX()-step12Diver.getX()/4, step12Diver.getY()-step12Diver.getY()/4, step12Diver.getWidth(), step12Diver.getHeight());
+                blood.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
             }
             title.draw(3*WIDTH/20,titleY,7*WIDTH/10,HEIGHT/5);
             //shark.draw(step1Shark.getX() - 150,(int)step1Shark.getY() - 60,200,100);
@@ -212,9 +227,11 @@ public class Snorkunking extends BasicGame {
 
             if (titleY>=23*HEIGHT/70) {
                 graphics.setColor(Color.cyan);
-                graphics.drawRect(WIDTH / 2 - 110*WIDTH/700, 475*HEIGHT/700, 22*WIDTH/70, 42*HEIGHT/700);
+                graphics.drawRoundRect(WIDTH / 2 - 110*WIDTH/700, 475*HEIGHT/700, 22*WIDTH/70, 42*HEIGHT/700,20);
                 enter.draw(WIDTH / 2 - 93*WIDTH/700,485*HEIGHT/700,19*WIDTH/70,3*HEIGHT/70);
+
             }
+
         }
     }
 

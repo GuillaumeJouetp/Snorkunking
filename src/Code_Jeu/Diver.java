@@ -22,8 +22,8 @@ public class Diver {
     }
 
     public void dispDiver() throws SlickException {
-        Image img = new Image("res/image/diver.png");
-        img.draw(Snorkunking.WIDTH/2, Snorkunking.HEIGHT/2);
+        Image diver = new Image("res/image/diver.png");
+        diver.draw(Snorkunking.WIDTH/2, Snorkunking.HEIGHT/2);
     }
 
     public int getX() {
@@ -45,7 +45,6 @@ public class Diver {
     public int getWidth() {
         return width;
     }
-
     public int getHeight() {
         return height;
     }
