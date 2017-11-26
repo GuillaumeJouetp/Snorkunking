@@ -12,16 +12,41 @@ public class Cave {
     private int height;
     private int x,y;
     private int id;
+    private int nbLevels;
+    private List<Level> levels = new ArrayList<>();
 
 
-    public Cave(int width, int height, int id) {
-
-
+    public Cave(int id) {
+        switch (id)
+        {
+            case 1:
+                nbLevels = (int)((12-9 + 1)*Math.random())+ 9; // between 9 & 12 levels in the 1st cave
+                for (int i = 0; i < nbLevels; i++) {
+                    levels.add(new Level(id));
+                }
+                break;
+            case 2:
+                nbLevels = (int)((9-6 + 1)*Math.random())+ 6; // between 9 & 12 levels in the 1st cave
+                for (int i = 0; i < nbLevels; i++) {
+                    levels.add(new Level(id));
+                }
+                break;
+            case 3:
+                nbLevels = (int)((6-3 + 1)*Math.random())+ 3; // between 9 & 12 levels in the 1st cave
+                for (int i = 0; i < nbLevels; i++) {
+                    levels.add(new Level(id));
+                }
+                break;
+        }
     }
 
 
     public void dispCave(Graphics graphics){
         graphics.setColor(Color.red);
         graphics.fillRect(x , y, width, height);
+    }
+
+    public int getNbLevels() {
+        return nbLevels;
     }
 }

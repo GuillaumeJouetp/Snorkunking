@@ -11,7 +11,8 @@ public class Diver {
     private int width;
     private int height;
     private String name;
-    private int score;
+    private int score = 0;
+    private int nbTreasures = 0;
 
     public Diver(int x, int y, int width,int height, String name) {
         this.x = x;
@@ -45,7 +46,20 @@ public class Diver {
     public int getWidth() {
         return width;
     }
+
     public int getHeight() {
         return height;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getNbTreasures() {
+        return nbTreasures;
     }
 }
