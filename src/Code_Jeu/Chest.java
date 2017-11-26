@@ -1,8 +1,5 @@
 package Code_Jeu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Chest {
     private int value;
 

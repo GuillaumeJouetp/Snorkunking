@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Snorkunking extends BasicGame {
 
-    public static int WIDTH = 1000;
-    public static int HEIGHT = 1000 ;
+    public static int WIDTH = 900;
+    public static int HEIGHT = 900;
 
     private int step; // To situate code to execute
 
@@ -38,14 +38,11 @@ public class Snorkunking extends BasicGame {
 
     private Shark step1Shark;
 
-    private int caveX;
-    private int caveY;
-    private int caveWidth;
-    private int caveHeight;
-
-
-    List<Cave> caves = new ArrayList<>();
+    DivingArea myDivingArea = new DivingArea();
+    List<Integer> scorePanel = new ArrayList<>();
     List<Diver> divers = new ArrayList<>();
+    Oxygene myOxygen = new Oxygene();
+    int phase = 0;
 
     public Snorkunking(String title) {
         super(title);
@@ -63,6 +60,9 @@ public class Snorkunking extends BasicGame {
 
         initMusicMenu();
         initImageMenu();
+
+        divers.add(new Diver(0,0,0,0,"Player 1"));
+        divers.add(new Diver(0,0,0,0,"Player 2"));
 
     }
 
@@ -283,6 +283,22 @@ public class Snorkunking extends BasicGame {
         Input input = gameContainer.getInput();
         if (step==3) {
             music1.pause();
+
+            if(phase == 1){
+                checkOxygeneLevel();
+
+            }
+            else if(phase == 2){
+                checkOxygeneLevel();
+
+            }
+            else if (phase == 3){
+                checkOxygeneLevel();
+            }
+            else{
+                endGame();
+
+            }
         }
     }
     public void step3draw(Graphics graphics){
@@ -304,4 +320,30 @@ public class Snorkunking extends BasicGame {
 
         }
     }
+
+    public void checkOxygeneLevel(){
+        if (myOxygen.getOxygenBars().size()<=0){
+            phase++;
+            myOxygen = new Oxygene();
+            divers.get(0).setScore(divers.get(0).getScore() + divers.get(0).getNbTreasures());
+            divers.get(1).setScore(divers.get(1).getScore() + divers.get(1).getNbTreasures());
+
+        }
+
+    }
+
+    public String whosTurnIsIt(){
+        if (divers.get(0).getY()>divers.get(1).getY()){
+            return ("Player one's turn !");
+        }
+        else
+            return ("Players two's turn !");
+    }
+
+    public void endGame(){
+
+
+    }
+
+
 }
