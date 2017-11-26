@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Snorkunking extends BasicGame {
 
-    public static int WIDTH = 1000;
-    public static int HEIGHT = 1000 ;
+    public static int WIDTH = 700;
+    public static int HEIGHT = 700;
 
     private int step; // To situate code to execute
 
@@ -38,10 +38,10 @@ public class Snorkunking extends BasicGame {
 
     private Shark step1Shark;
 
-    private int caveX;
-    private int caveY;
-    private int caveWidth;
-    private int caveHeight;
+    private int caveX=WIDTH/70;
+    private int caveY=HEIGHT/5;
+    private int caveWidth=WIDTH-2*WIDTH/70;
+    private int caveHeight=4*HEIGHT/5-HEIGHT/70;
 
 
     List<Cave> caves = new ArrayList<>();
@@ -288,7 +288,7 @@ public class Snorkunking extends BasicGame {
     public void step3draw(Graphics graphics){
         if (step==3){
             graphics.setColor(Color.green);
-            graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            graphics.drawRect(caveX,caveY,caveWidth,caveHeight);
         }
     }
     public void step4(GameContainer gameContainer){
@@ -300,7 +300,7 @@ public class Snorkunking extends BasicGame {
     public void step4draw(Graphics graphics){
         if (step==4){
             graphics.setColor(Color.orange);
-            graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            graphics.drawRect(caveX,caveY,caveWidth,caveHeight);
 
         }
     }
