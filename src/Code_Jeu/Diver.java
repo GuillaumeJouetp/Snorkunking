@@ -1,9 +1,9 @@
 package Code_Jeu;
 
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Diver {
     private int x;
@@ -13,6 +13,7 @@ public class Diver {
     private String name;
     private int score = 0;
     private int nbTreasures = 0;
+    private List<Chest> diverChests;
 
     public Diver(int x, int y, int width,int height, String name) {
         this.x = x;
@@ -26,6 +27,8 @@ public class Diver {
         Image diver = new Image("res/image/diver.png");
         diver.draw(Snorkunking.WIDTH/2, Snorkunking.HEIGHT/2);
     }
+
+
 
     public int getX() {
         return x;

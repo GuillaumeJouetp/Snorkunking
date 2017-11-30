@@ -38,11 +38,13 @@ public class Snorkunking extends BasicGame {
 
     private Shark step1Shark;
 
-    DivingArea myDivingArea = new DivingArea();
+    public static DivingArea myDivingArea = new DivingArea();
     List<Integer> scorePanel = new ArrayList<>();
     List<Diver> divers = new ArrayList<>();
-    Oxygene myOxygen = new Oxygene();
-    int phase = 0;
+    public static Oxygene myOxygen = new Oxygene();
+    List<OxygeneBar> oxygenBars;
+
+    int phase = 1;
 
     public Snorkunking(String title) {
         super(title);
@@ -63,6 +65,9 @@ public class Snorkunking extends BasicGame {
 
         divers.add(new Diver(0,0,0,0,"Player 1"));
         divers.add(new Diver(0,0,0,0,"Player 2"));
+
+        oxygenBars = new ArrayList<>();
+        fillOxygen();
 
     }
 
@@ -301,10 +306,12 @@ public class Snorkunking extends BasicGame {
             }
         }
     }
+
     public void step3draw(Graphics graphics){
         if (step==3){
-            graphics.setColor(Color.green);
-            graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            myDivingArea.drawDivingArea(graphics);
+            graphics.setColor(Color.blue);
+            graphics.drawRect(2*WIDTH/100,2*WIDTH/100,96*WIDTH/100,14*HEIGHT/100);
         }
     }
     public void step4(GameContainer gameContainer){
@@ -322,7 +329,7 @@ public class Snorkunking extends BasicGame {
     }
 
     public void checkOxygeneLevel(){
-        if (myOxygen.getOxygenBars().size()<=0){
+        if (oxygenBars.size()<=0){
             phase++;
             myOxygen = new Oxygene();
             divers.get(0).setScore(divers.get(0).getScore() + divers.get(0).getNbTreasures());
@@ -331,6 +338,38 @@ public class Snorkunking extends BasicGame {
         }
 
     }
+
+    public void fillOxygen(){
+        for (int i = 0; i <myOxygen.getOxygeneLevel() ; i++) {
+            oxygenBars.add(new OxygeneBar(i,7));
+        }
+    }
+
+    /*
+    public void action(GameContainer gc){
+        Input input = gc.getInput();
+        //List<OxygeneBar> toRemove = new ArrayList<>();
+
+        if (input.isKeyPressed(Input.KEY_DOWN)) { // diver going down
+            y += Level.HEIGHT;
+            for (int i = 0; i < diverChests.size() + 1; i++) { // diver's weight + movement
+                Snorkunking.myOxygen.oxygenBars.remove(Snorkunking.myOxygen.oxygenBars.size() - 1);
+            }
+        }
+        if (input.isKeyPressed(Input.KEY_UP)) { // diver going up
+            y-=Level.HEIGHT;
+            for (int i = 0; i < diverChests.size() + 1; i++) { // diver's weight + movement
+                Snorkunking.myOxygen.oxygenBars.remove(Snorkunking.myOxygen.oxygenBars.size() - 1);
+            }
+        }
+        //for (Chest elt :  ) {
+        if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
+            Snorkunking.myOxygen.oxygenBars.remove(Snorkunking.myOxygen.oxygenBars.size() - 1);
+            //diverChests.add(elt);
+        }
+        //}
+    }
+    */
 
     public String whosTurnIsIt(){
         if (divers.get(0).getY()>divers.get(1).getY()){
@@ -344,6 +383,5 @@ public class Snorkunking extends BasicGame {
 
 
     }
-
 
 }

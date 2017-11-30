@@ -6,5 +6,8 @@ public class OxygeneBar {
     private  int x;
     private int y;
 
-
+    public OxygeneBar(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 }
