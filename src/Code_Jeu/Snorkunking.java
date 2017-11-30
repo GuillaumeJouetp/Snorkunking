@@ -239,7 +239,7 @@ public class Snorkunking extends BasicGame {
 
         }
     }
-
+ 
     //choisir options de jeu//
     public void diverChoiceGame(){
         //jouer contre l'ordi//
