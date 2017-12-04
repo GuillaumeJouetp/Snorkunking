@@ -239,7 +239,7 @@ public class Snorkunking extends BasicGame {
 
         }
     }
- 
+
     //choisir options de jeu//
     public void diverChoiceGame(){
         //jouer contre l'ordi//
@@ -309,9 +309,10 @@ public class Snorkunking extends BasicGame {
 
     public void step3draw(Graphics graphics){
         if (step==3){
-            myDivingArea.drawDivingArea(graphics);
+            //myDivingArea.drawDivingArea(graphics);
             graphics.setColor(Color.blue);
             graphics.drawRect(2*WIDTH/100,2*WIDTH/100,96*WIDTH/100,14*HEIGHT/100);
+            myDivingArea.drawLevels(graphics);
         }
     }
     public void step4(GameContainer gameContainer){
