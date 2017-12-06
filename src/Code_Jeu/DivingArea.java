@@ -25,7 +25,7 @@ public class DivingArea {
         System.out.println("Nombre de niveaux total :"+ NBLEVELS);
 
         Level.HEIGHT = (HEIGHT/(NBLEVELS));
-        System.out.println("pAAAAAAAAAAs: "+Level.HEIGHT);
+        System.out.println("pas: "+Level.HEIGHT);
 
     }
 

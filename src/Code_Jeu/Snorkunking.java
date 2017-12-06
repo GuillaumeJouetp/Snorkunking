@@ -202,16 +202,16 @@ public class Snorkunking extends BasicGame {
         if (step==1) {
             goldTreasure.draw(-2*WIDTH/7,55*HEIGHT/70,5*WIDTH/7,3*HEIGHT/7);
             goldTreasure.draw(3*WIDTH/7,55*HEIGHT/70,5*WIDTH/7,3*HEIGHT/7);
-            money.draw(10,fastCoin.getY()-10,30,30);
-            money.draw(100,regularCoin.getY()-30,30,30);
-            money.draw(170,slowCoin.getY()-80,30,30);
-            money.draw(250,regularCoin.getY()-40,30,30);
-            money.draw(300,slowCoin.getY()-100,30,30);
-            money.draw(400,fastCoin.getY()-50,30,30);
-            money.draw(430,slowCoin.getY()-10,30,30);
-            money.draw(510,regularCoin.getY()-60,30,30);
-            money.draw(600,fastCoin.getY()-70,30,30);
-            money.draw(660,regularCoin.getY()-10,30,30);
+            money.draw(WIDTH/70,fastCoin.getY()-10,30,30);
+            money.draw(WIDTH/7,regularCoin.getY()-100,30,30);
+            money.draw(17*WIDTH/70,slowCoin.getY()-80,30,30);
+            money.draw(25*WIDTH/70,regularCoin.getY()-40,30,30);
+            money.draw(3*WIDTH/7,slowCoin.getY()-100,30,30);
+            money.draw(4*WIDTH/7,fastCoin.getY()-50,30,30);
+            money.draw(43*WIDTH/70,slowCoin.getY()-10,30,30);
+            money.draw(51*WIDTH/70,regularCoin.getY()-60,30,30);
+            money.draw(6*WIDTH/7,fastCoin.getY()-70,30,30);
+            money.draw(66*WIDTH/70,regularCoin.getY()-10,30,30);
 
 
             if (death==0) {
