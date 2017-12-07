@@ -8,6 +8,7 @@ import java.awt.Image;
 
 public class Chest {
 
+
     public int x;
     public int y;
     private int value;
@@ -15,6 +16,9 @@ public class Chest {
 
 
     public Chest(int CaveId) {
+        //x = (int)((DivingArea.WIDTH-WIDTH+1)*Math.random())+WIDTH; // Random placement on the level
+        x = (int)((600-20+1)*Math.random())+20; // Random placement on the level
+        System.out.println("AAAAAAAAAAAAAAAAA"+x);
         switch (CaveId)
         {
             case 1:
@@ -35,10 +39,12 @@ public class Chest {
         return value;
     }
 
-    public static void drawChest(int x,int y)  throws SlickException {
+    public void drawChest(int y)  throws SlickException {
 
         org.newdawn.slick.Image chest = new org.newdawn.slick.Image("res/image/chest.png");
-        chest.draw(x,y,150*Level.HEIGHT/100,Level.HEIGHT);
+        int WIDTH = 150*Level.HEIGHT/100;
+        int HEIGHT = Level.HEIGHT;
+        chest.draw(x,y,WIDTH,HEIGHT);
 
     }
 
