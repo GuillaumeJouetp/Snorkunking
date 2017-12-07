@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Snorkunking extends BasicGame {
 
-    public static int WIDTH = 900;
-    public static int HEIGHT = 900;
+    public static int WIDTH = 700;
+    public static int HEIGHT = 700;
 
     private int step; // To situate code to execute
 
@@ -55,6 +55,7 @@ public class Snorkunking extends BasicGame {
         step=1;
         step1Shark = new Shark(-4*WIDTH/7,HEIGHT/7,WIDTH/3,HEIGHT/7);
         step12Diver = new Diver(WIDTH/2,HEIGHT-2*HEIGHT/5,WIDTH/7,HEIGHT/14,"Step 1&2 diver");
+
 
         fastCoin = new Money(4);
         regularCoin = new Money(2);
@@ -115,6 +116,7 @@ public class Snorkunking extends BasicGame {
 
     public void initImageMenu() throws SlickException {
         fond = new Image("res/image/ocean.jpg");
+
 
         diver = new Image("res/image/diver.png");
         title = new Image("res/image/title.png");
@@ -199,6 +201,7 @@ public class Snorkunking extends BasicGame {
         }
     }
     public void step1draw(Graphics graphics) throws SlickException {
+
         if (step==1) {
             goldTreasure.draw(-2*WIDTH/7,55*HEIGHT/70,5*WIDTH/7,3*HEIGHT/7);
             goldTreasure.draw(3*WIDTH/7,55*HEIGHT/70,5*WIDTH/7,3*HEIGHT/7);
@@ -307,12 +310,14 @@ public class Snorkunking extends BasicGame {
         }
     }
 
-    public void step3draw(Graphics graphics){
+    public void step3draw(Graphics graphics) throws  SlickException{
         if (step==3){
             //myDivingArea.drawDivingArea(graphics);
             graphics.setColor(Color.blue);
             graphics.drawRect(2*WIDTH/100,2*WIDTH/100,96*WIDTH/100,14*HEIGHT/100);
             myDivingArea.drawLevels(graphics);
+            myDivingArea.drawChests();
+
         }
     }
     public void step4(GameContainer gameContainer){
@@ -321,10 +326,11 @@ public class Snorkunking extends BasicGame {
             music1.pause();
         }
     }
-    public void step4draw(Graphics graphics){
+    public void step4draw(Graphics graphics) throws  SlickException{
         if (step==4){
             graphics.setColor(Color.orange);
             graphics.drawRect(WIDTH/70,15*HEIGHT/70,68*WIDTH/70,54*HEIGHT/70);
+            myDivingArea.drawChests();
 
         }
     }

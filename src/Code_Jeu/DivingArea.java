@@ -2,6 +2,7 @@ package Code_Jeu;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +57,19 @@ public class DivingArea {
             }
         }
     }
+
+    public void drawChests() throws SlickException{
+        int p=0;
+        for (int j = 0 ; j < caves.size(); j++) {
+            for (int i = 0 ; i <caves.get(j).getNbLevels() ; i++) {
+                caves.get(j).getLevels().get(i).getChests().get(0).x = (int)((900-100+1)*Math.random())+100;
+                caves.get(j).getLevels().get(i).getChests().get(0).y = y + p * Level.HEIGHT;
+                p++;
+                Chest.drawChest(caves.get(j).getLevels().get(i).getChests().get(0).x, caves.get(j).getLevels().get(i).getChests().get(0).y);
+            }
+        }
+    }
+
+
 
 }

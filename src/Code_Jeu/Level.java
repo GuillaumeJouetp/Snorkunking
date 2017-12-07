@@ -25,6 +25,10 @@ public class Level {
         Level.HEIGHT = HEIGHT;
     }
 
+    public List<Chest> getChests() {
+        return chests;
+    }
+
     public static void drawLevel(Graphics graphics,int y){
         graphics.drawRect(x,y,WIDTH,HEIGHT);
 
