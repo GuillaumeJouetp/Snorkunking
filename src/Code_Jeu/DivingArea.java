@@ -62,10 +62,9 @@ public class DivingArea {
         int p=0;
         for (int j = 0 ; j < caves.size(); j++) {
             for (int i = 0 ; i <caves.get(j).getNbLevels() ; i++) {
-                caves.get(j).getLevels().get(i).getChests().get(0).x = (int)((WIDTH-x-Chest.getX())*Math.random())+x;
                 caves.get(j).getLevels().get(i).getChests().get(0).y = y + p * Level.HEIGHT;
                 p++;
-                Chest.drawChest(caves.get(j).getLevels().get(i).getChests().get(0).x, caves.get(j).getLevels().get(i).getChests().get(0).y);
+                caves.get(j).getLevels().get(i).getChests().get(0).drawChest(caves.get(j).getLevels().get(i).getChests().get(0).y);
             }
         }
     }
