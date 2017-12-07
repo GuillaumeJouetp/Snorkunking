@@ -248,7 +248,7 @@ public class Snorkunking extends BasicGame {
     //choisir options de jeu//
     public void diverChoiceGame(){
         //jouer contre l'ordi//
-        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<515*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700){
+        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<605*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700){
             step=3;
         }
         //jouer contre un autre joueur//
@@ -262,7 +262,7 @@ public class Snorkunking extends BasicGame {
             step=1;
         }
         //lance les instructions
-        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<515*WIDTH/700 && step12Diver.getY()>155*HEIGHT/700 && step12Diver.getY()<205*HEIGHT/700) {
+        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<605*WIDTH/700 && step12Diver.getY()>155*HEIGHT/700 && step12Diver.getY()<205*HEIGHT/700) {
             step=10;
 
         }
