@@ -8,8 +8,8 @@ import java.awt.Image;
 
 public class Chest {
 
-    public int x;
-    public int y;
+    private int x;
+    private int y;
     private int value;
 
 
