@@ -92,6 +92,8 @@ public class Snorkunking extends BasicGame {
 
         step2draw(graphics);
 
+        instructions(graphics,gameContainer);
+
         step3draw(graphics);
 
         step4draw(graphics);
@@ -246,13 +248,25 @@ public class Snorkunking extends BasicGame {
     //choisir options de jeu//
     public void diverChoiceGame(){
         //jouer contre l'ordi//
-        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<595*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700){
+        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<515*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700){
             step=3;
         }
         //jouer contre un autre joueur//
-        if(step12Diver.getX()>75*WIDTH/700 && step12Diver.getX()<205*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700) {
+        if(step12Diver.getX()>75*WIDTH/700 && step12Diver.getX()<215*WIDTH/700 && step12Diver.getY()>455*HEIGHT/700 && step12Diver.getY()<505*HEIGHT/700) {
             step=3;
         }
+        //retourne au menu principal
+        if(step12Diver.getX()>75*WIDTH/700 && step12Diver.getX()<215*WIDTH/700 && step12Diver.getY()>155*HEIGHT/700 && step12Diver.getY()<205*HEIGHT/700) {
+            step12Diver.setX(WIDTH/2);
+            step12Diver.setY(HEIGHT-2*HEIGHT/5);
+            step=1;
+        }
+        //lance les instructions
+        if(step12Diver.getX()>465*WIDTH/700 && step12Diver.getX()<515*WIDTH/700 && step12Diver.getY()>155*HEIGHT/700 && step12Diver.getY()<205*HEIGHT/700) {
+            step=10;
+
+        }
+
     }
 
     public void step2(GameContainer gameContainer){
@@ -272,6 +286,11 @@ public class Snorkunking extends BasicGame {
             graphics.drawRect(75*WIDTH/700, 455*HEIGHT/700, 15*WIDTH/70, 5*HEIGHT/70);
             graphics.drawString("1 Player", 110*WIDTH/700, 47*HEIGHT/70);
 
+            graphics.drawRect(465*WIDTH/700, 155*HEIGHT/700, 15*WIDTH/70, 5*HEIGHT/70);
+            graphics.drawString("Instructions", 490*WIDTH/700, 17*HEIGHT/70);
+            graphics.drawRect(75*WIDTH/700, 155*HEIGHT/700, 15*WIDTH/70, 5*HEIGHT/70);
+            graphics.drawString("Back to menu", 100*WIDTH/700, 17*HEIGHT/70);
+
             if (diverpos==0) {
                 diver.draw(step12Diver.getX()-step12Diver.getWidth()/2, step12Diver.getY()-step12Diver.getHeight()/2, step12Diver.getWidth(), step12Diver.getHeight());
             }
@@ -285,6 +304,21 @@ public class Snorkunking extends BasicGame {
                 graphics.drawString("Use arrow keys to move the diver",2*WIDTH/7,66*HEIGHT/70);
             }
         }
+    }
+
+    public void instructions(Graphics graphics,GameContainer gameContainer) throws  SlickException{
+        Input input = gameContainer.getInput();
+        if(step==10) {
+            graphics.drawRect(275 * WIDTH / 700, 585 * HEIGHT / 700, 18 * WIDTH / 70, 5 * HEIGHT / 70);
+            graphics.drawString("Press enter to back", 280 * WIDTH / 700, 60 * HEIGHT / 70);
+        }
+        if (input.isKeyDown(Input.KEY_ENTER)) {
+            step12Diver.setX(345 * WIDTH / 700);
+            step12Diver.setY(325 * HEIGHT / 700);
+            Pad=1;
+            step=2;
+        }
+
     }
 
     public void step3(GameContainer gameContainer){
