@@ -13,7 +13,7 @@ public class Diver {
     private String name;
     private int score = 0;
     private int nbTreasures = 0;
-    private List<Chest> diverChests;
+    public List<Chest> diverChests = new ArrayList<>();
 
     public Diver(int x, int y, int width,int height, String name) {
         this.x = x;
@@ -23,9 +23,9 @@ public class Diver {
         this.name = name;
     }
 
-    public void dispDiver() throws SlickException {
+    public void drawDiver() throws SlickException {
         Image diver = new Image("res/image/diver.png");
-        diver.draw(Snorkunking.WIDTH/2, Snorkunking.HEIGHT/2);
+        diver.draw(x, y,width,height);
     }
 
 
@@ -64,5 +64,13 @@ public class Diver {
 
     public int getNbTreasures() {
         return nbTreasures;
+    }
+
+    public List<Chest> getDiverChests() {
+        return diverChests;
+    }
+
+    public void setDiverChests(List<Chest> diverChests) {
+        this.diverChests = diverChests;
     }
 }

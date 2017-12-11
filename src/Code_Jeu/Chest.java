@@ -18,7 +18,6 @@ public class Chest {
     public Chest(int CaveId) {
         //x = (int)((DivingArea.WIDTH-WIDTH+1)*Math.random())+WIDTH; // Random placement on the level
         x = (int)(((DivingArea.WIDTH-150*Level.HEIGHT/100) - DivingArea.x +1)*Math.random())+DivingArea.x; // Random placement on the level
-        System.out.println("AAAAAAAAAAAAAAAAA"+x);
         int y =  (int)((4-2+1)*Math.random())+2;
         System.out.println(y);
         switch (CaveId)

@@ -13,10 +13,8 @@ public class DivingArea {
     public static int x = 2*Snorkunking.WIDTH/100;
     public static int y = 20*Snorkunking.HEIGHT/100;
 
-    List<Integer> pos = new ArrayList<>();
-
     public static int NBLEVELS;
-    private List<Cave> caves = new ArrayList<>();
+    public List<Cave> caves = new ArrayList<>();
 
     public DivingArea() {
         caves.add(new Cave(1));
@@ -62,9 +60,11 @@ public class DivingArea {
         int p=0;
         for (int j = 0 ; j < caves.size(); j++) {
             for (int i = 0 ; i <caves.get(j).getNbLevels() ; i++) {
-                caves.get(j).getLevels().get(i).getChests().get(0).y = y + p * Level.HEIGHT;
-                p++;
-                caves.get(j).getLevels().get(i).getChests().get(0).drawChest(caves.get(j).getLevels().get(i).getChests().get(0).y);
+                for (int k = 0; k < caves.get(j).getLevels().get(i).getChests().size(); k++) {
+                    caves.get(j).getLevels().get(i).getChests().get(k).y = y + p * Level.HEIGHT;
+                    p++;
+                    caves.get(j).getLevels().get(i).getChests().get(k).drawChest(caves.get(j).getLevels().get(i).getChests().get(0).y);
+                }
             }
         }
     }
