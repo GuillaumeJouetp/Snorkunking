@@ -48,14 +48,9 @@ public class Snorkunking extends BasicGame {
         slowCoin = new Money(1);
         initMusicMenu();
         initImageMenu();
-        divers.add(new Diver(DivingArea.x+DivingArea.WIDTH/2, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 1"));
-        System.out.println(divers.get(0).getX());
-        System.out.println(DivingArea.x+DivingArea.WIDTH/2);
-        System.out.println(DivingArea.y);
-        System.out.println(10*Level.WIDTH/100);
-        System.out.println(Level.HEIGHT);
+        divers.add(new Diver(DivingArea.x+DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 1"));
+        divers.add(new Diver(DivingArea.x+2*DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 2"));
 
-        divers.add(new Diver(0, 0, 0, 0, "Player 2"));
     }
 
     @Override
@@ -276,6 +271,7 @@ public class Snorkunking extends BasicGame {
         }
     }
 
+    int turn =0;
     public void step3(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step == 3) {
@@ -297,12 +293,14 @@ public class Snorkunking extends BasicGame {
 
     public void step3draw(Graphics graphics) throws SlickException {
         if (step == 3) {
-            //myDivingArea.drawDivingArea(graphics);
-            graphics.setColor(Color.blue);
-            graphics.drawRect(2 * WIDTH / 100, 2 * WIDTH / 100, 96 * WIDTH / 100, 14 * HEIGHT / 100);
+            myOxygen.drawBottle(graphics);
             myDivingArea.drawLevels(graphics);
             myDivingArea.drawChests();
-            divers.get(0).drawDiver();
+            for (int i = 0; i <divers.size() ; i++) {
+                divers.get(i).drawDiver();
+            }
+            graphics.drawString("Chests Number " + divers.get(0).getName() + " : " + Integer.toString(divers.get(0).diverChests.size()),20,40);
+            graphics.drawString("Chests Number " + divers.get(1).getName() + " : " + Integer.toString(divers.get(1).diverChests.size()),300,40);
             myOxygen.drawOxygen(graphics);
         }
     }
@@ -327,61 +325,54 @@ public class Snorkunking extends BasicGame {
         if (myOxygen.getValue() <= 0) {
             phase++;
             myOxygen = new Oxygene();
-            divers.get(0).setScore(divers.get(0).getScore() + divers.get(0).getNbTreasures());
-            divers.get(1).setScore(divers.get(1).getScore() + divers.get(1).getNbTreasures());
+            for (int i = 0; i <divers.size() ; i++) {
+                divers.get(i).setScore(divers.get(i).getScore() + divers.get(i).getNbTreasures());
+            }
         }
     }
 
-
-    /*
-    public void fillOxygen(){
-        for (int i = 0; i <myOxygen.getOxygeneLevel() ; i++) {
-            oxygenBars.add(new OxygeneBar(i,7));
-        }
-    }
-    */
-
+    Diver currentPlayer;
     public void action(GameContainer gc) {
         Input input = gc.getInput();
+        currentPlayer = divers.get(turn);
         if (input.isKeyPressed(Input.KEY_DOWN)) { // diver going down
-            divers.get(0).setY(divers.get(0).getY() + Level.HEIGHT);
-            for (int i = 0; i < divers.get(0).getDiverChests().size() + 1; i++) { // diver's weight + movement
+            currentPlayer.setY(currentPlayer.getY() + Level.HEIGHT);
+            for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
                 myOxygen.setValue(myOxygen.getValue() - 1);
             }
+            if (turn == 0)
+            turn ++;
+            else turn--;
         }
         if (input.isKeyPressed(Input.KEY_UP)) { // diver going down
-            divers.get(0).setY(divers.get(0).getY() - Level.HEIGHT);
+            currentPlayer.setY(divers.get(0).getY() - Level.HEIGHT);
             for (int i = 0; i < divers.get(0).getDiverChests().size() + 1; i++) { // diver's weight + movement
                 myOxygen.setValue(myOxygen.getValue() - 1);
             }
+            if (turn == 0)
+                turn ++;
+            else turn--;
         }
         if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
             for (int j = 0; j < myDivingArea.caves.size(); j++) {
                 for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
                     for (int k = 0; k <  myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++){
-                        if (divers.get(0).getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
-                           divers.get(0).diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
+                        if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
+                            currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
                            myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
                            myOxygen.setValue(myOxygen.getValue() - 1);
                         }
                     }
                 }
             }
+            if (turn == 0)
+                turn ++;
+            else turn--;
         }
 
 
     }
 
-
-
-
-    public String whosTurnIsIt(){
-        if (divers.get(0).getY()>divers.get(1).getY()){
-            return ("Player one's turn !");
-        }
-        else
-            return ("Players two's turn !");
-    }
 
     public void endGame(){
 

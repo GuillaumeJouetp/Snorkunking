@@ -25,6 +25,7 @@ public class DivingArea {
 
         Level.HEIGHT = (HEIGHT/(NBLEVELS));
         System.out.println("pas: "+Level.HEIGHT);
+        initChests();
 
     }
 
@@ -57,13 +58,25 @@ public class DivingArea {
     }
 
     public void drawChests() throws SlickException{
+        //int p=0;
+        for (int j = 0 ; j < caves.size(); j++) {
+            for (int i = 0 ; i <caves.get(j).getNbLevels() ; i++) {
+                for (int k = 0; k < caves.get(j).getLevels().get(i).getChests().size(); k++) {
+                    //caves.get(j).getLevels().get(i).getChests().get(k).y = y + p * Level.HEIGHT;
+                    //p++;
+                    caves.get(j).getLevels().get(i).getChests().get(k).drawChest(caves.get(j).getLevels().get(i).getChests().get(0).y);
+                }
+            }
+        }
+    }
+
+    public void initChests() {
         int p=0;
         for (int j = 0 ; j < caves.size(); j++) {
             for (int i = 0 ; i <caves.get(j).getNbLevels() ; i++) {
                 for (int k = 0; k < caves.get(j).getLevels().get(i).getChests().size(); k++) {
                     caves.get(j).getLevels().get(i).getChests().get(k).y = y + p * Level.HEIGHT;
                     p++;
-                    caves.get(j).getLevels().get(i).getChests().get(k).drawChest(caves.get(j).getLevels().get(i).getChests().get(0).y);
                 }
             }
         }

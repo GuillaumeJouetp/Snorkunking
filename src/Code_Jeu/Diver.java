@@ -28,6 +28,12 @@ public class Diver {
         diver.draw(x, y,width,height);
     }
 
+    public void drawChestNumber(Graphics graphics,Diver diver){
+
+        graphics.drawString("Chests Number " + diver.getName() + Integer.toString(diverChests.size()),20,30);
+    }
+
+
 
 
     public int getX() {
@@ -68,6 +74,14 @@ public class Diver {
 
     public List<Chest> getDiverChests() {
         return diverChests;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDiverChests(List<Chest> diverChests) {
