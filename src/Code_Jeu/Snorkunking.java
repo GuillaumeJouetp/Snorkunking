@@ -33,7 +33,7 @@ public class Snorkunking extends BasicGame {
     List<Integer> scorePanel = new ArrayList<>();
     List<Diver> divers = new ArrayList<>();
     public static Oxygene myOxygen = new Oxygene();
-    int phase = 1;
+
 
     public Snorkunking(String title) {
         super(title);
@@ -277,6 +277,7 @@ public class Snorkunking extends BasicGame {
     }
 
     int turn =0;
+    int phase = 1;
     public void step3(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step == 3) {
@@ -297,7 +298,7 @@ public class Snorkunking extends BasicGame {
     }
 
     public void step3draw(Graphics graphics) throws SlickException {
-        if (step == 3) {
+        if (step == 3 && phase <=3) {
             myOxygen.drawBottle(graphics);
             myDivingArea.drawLevels(graphics);
             myDivingArea.drawChests();
@@ -307,6 +308,9 @@ public class Snorkunking extends BasicGame {
             graphics.drawString("Chests Number " + divers.get(0).getName() + " : " + Integer.toString(divers.get(0).diverChests.size()),20,40);
             graphics.drawString("Chests Number " + divers.get(1).getName() + " : " + Integer.toString(divers.get(1).diverChests.size()),300,40);
             myOxygen.drawOxygen(graphics);
+        }
+        if(phase >3){
+            drawEndGame();
         }
     }
 
@@ -336,7 +340,7 @@ public class Snorkunking extends BasicGame {
         }
     }
 
-    Diver currentPlayer;
+    private Diver currentPlayer;
     public void action(GameContainer gc) {
         Input input = gc.getInput();
         currentPlayer = divers.get(turn);
@@ -381,7 +385,11 @@ public class Snorkunking extends BasicGame {
 
     public void endGame(){
 
+    }
 
+    public void drawEndGame()throws SlickException{
+        Image shark = new Image("res/image/LOL.png");
+        shark.draw(0,0,WIDTH,HEIGHT);
     }
 
 }
