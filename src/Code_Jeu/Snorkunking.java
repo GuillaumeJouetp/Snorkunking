@@ -17,6 +17,7 @@ public class Snorkunking extends BasicGame {
     private int step; // To situate code to execute
     private Image fond, diver, title, blood, goldTreasure, money, enter, leftSideDiver, pad, rightIndication, leftIndication;
     private Music music1;
+    private Music music2;
     private Sound sound1;
     private int titleY = -4 * HEIGHT / 7;
     private int death = 0;
@@ -81,9 +82,13 @@ public class Snorkunking extends BasicGame {
     }
 
     public void initMusicMenu() throws SlickException {
+        music2 = new Music("res/sound/tictoc.ogg");
+        music2.setVolume(0.2f);
+
         music1 = new Music("res/sound/opening.ogg");
         music1.setVolume(0.2f);
         music1.loop();
+
         sound1 = new Sound("res/sound/cri.wav");
     }
 
