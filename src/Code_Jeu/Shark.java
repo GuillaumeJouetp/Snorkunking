@@ -58,7 +58,7 @@ public class Shark {
 
     public void drawShark() throws SlickException{
 
-        Image shark = new Image("res/image/shark.png");
+        Image shark = new Image("res/image/LOL.png");
         shark.draw(x - (width-width/4),(int)y - height/2,width,height);
     }
 }

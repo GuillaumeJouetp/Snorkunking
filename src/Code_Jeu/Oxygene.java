@@ -25,14 +25,15 @@ public class Oxygene {
     }
 
     public void drawBottle(Graphics graphics){
-        graphics.setColor(Color.blue);
-        graphics.drawRect(2 * Snorkunking.WIDTH / 100, 2 * Snorkunking.WIDTH / 100, 96 * Snorkunking.WIDTH / 100, 14 * Snorkunking.HEIGHT / 100);
+
 
     }
 
     public void drawOxygen(Graphics graphics){
 
-        graphics.drawString("Reserve d'oxygène : "+Integer.toString(value),20,20);
+        graphics.setColor(Color.blue);
+        graphics.drawString("("+Integer.toString(value)+")",ScorePanel.x + 5*ScorePanel.WIDTH/100,ScorePanel.y + 70*ScorePanel.HEIGHT/100);
+        graphics.fillRect(ScorePanel.x + 10*ScorePanel.WIDTH/100,ScorePanel.y + 70*ScorePanel.HEIGHT/100,value*2*ScorePanel.WIDTH/120,10*ScorePanel.HEIGHT/100);
     }
 
 

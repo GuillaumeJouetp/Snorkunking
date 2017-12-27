@@ -87,4 +87,8 @@ public class Diver {
     public void setDiverChests(List<Chest> diverChests) {
         this.diverChests = diverChests;
     }
+
+    public void setNbTreasures(int nbTreasures) {
+        this.nbTreasures = nbTreasures;
+    }
 }

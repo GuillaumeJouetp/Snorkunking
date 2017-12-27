@@ -51,6 +51,10 @@ public class Cave {
         return nbLevels;
     }
 
+    public void setNbLevels(int nbLevels) {
+        this.nbLevels = nbLevels;
+    }
+
     public List<Level> getLevels() {
         return levels;
     }
