@@ -7,6 +7,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.gui.TextField;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Snorkunking extends BasicGame {
     private Music music1;
     private Music music2;
     private Sound sound1;
+
     private int titleY = -4 * HEIGHT / 7;
     private int death = 0;
     private int diverpos = 0;
@@ -52,6 +54,7 @@ public class Snorkunking extends BasicGame {
         divers.add(new Diver(DivingArea.x+DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 1"));
         divers.add(new Diver(DivingArea.x+2*DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 2"));
 
+
     }
 
     @Override
@@ -60,6 +63,7 @@ public class Snorkunking extends BasicGame {
         step2(gameContainer); // Menu (chose 1 or 2 players)
         step3(gameContainer); // Game with 2 player
         step4(gameContainer); // Game with 1 player
+        System.out.println("on en est à l'étape : " + step);
     }
 
     @Override
@@ -82,7 +86,7 @@ public class Snorkunking extends BasicGame {
     }
 
     public void initMusicMenu() throws SlickException {
-        music2 = new Music("res/sound/tictoc.ogg");
+        music2 = new Music("res/sound/game.ogg");
         music2.setVolume(0.2f);
 
         music1 = new Music("res/sound/opening.ogg");
@@ -90,6 +94,7 @@ public class Snorkunking extends BasicGame {
         music1.loop();
 
         sound1 = new Sound("res/sound/cri.wav");
+
     }
 
     public void initImageMenu() throws SlickException {
@@ -147,6 +152,7 @@ public class Snorkunking extends BasicGame {
     public void step1(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step == 1) {
+
             //fais descendre le title//
             if (titleY <= 23 * HEIGHT / 70) {
                 titleY += 4;
@@ -230,7 +236,9 @@ public class Snorkunking extends BasicGame {
 
     public void step2(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
+
         if (step == 2) {
+
             updateDiverStep01(gameContainer);
             diverChoiceGame();
         }
@@ -267,13 +275,14 @@ public class Snorkunking extends BasicGame {
         if (step == 10) {
             graphics.drawRect(275 * WIDTH / 700, 585 * HEIGHT / 700, 18 * WIDTH / 70, 5 * HEIGHT / 70);
             graphics.drawString("Press enter to back", 280 * WIDTH / 700, 60 * HEIGHT / 70);
+            if (input.isKeyDown(Input.KEY_ENTER)) {
+                step12Diver.setX(345 * WIDTH / 700);
+                step12Diver.setY(325 * HEIGHT / 700);
+                Pad = 1;
+                step = 2;
+            }
         }
-        if (input.isKeyDown(Input.KEY_ENTER)) {
-            step12Diver.setX(345 * WIDTH / 700);
-            step12Diver.setY(325 * HEIGHT / 700);
-            Pad = 1;
-            step = 2;
-        }
+
     }
 
     int turn =0;
@@ -281,7 +290,9 @@ public class Snorkunking extends BasicGame {
     public void step3(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step == 3) {
-            music1.pause();
+
+            music1.stop();
+
             if (phase == 1) {
                 checkOxygeneLevel();
                 action(gameContainer);
@@ -317,7 +328,7 @@ public class Snorkunking extends BasicGame {
     public void step4(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step == 4) {
-            music1.pause();
+
         }
     }
 
@@ -341,6 +352,7 @@ public class Snorkunking extends BasicGame {
     }
 
     private Diver currentPlayer;
+
     public void action(GameContainer gc) {
         Input input = gc.getInput();
         currentPlayer = divers.get(turn);
@@ -354,7 +366,7 @@ public class Snorkunking extends BasicGame {
             else turn--;
         }
         if (input.isKeyPressed(Input.KEY_UP)) { // diver going down
-            currentPlayer.setY(divers.get(0).getY() - Level.HEIGHT);
+            currentPlayer.setY(currentPlayer.getY() - Level.HEIGHT);
             for (int i = 0; i < divers.get(0).getDiverChests().size() + 1; i++) { // diver's weight + movement
                 myOxygen.setValue(myOxygen.getValue() - 1);
             }
