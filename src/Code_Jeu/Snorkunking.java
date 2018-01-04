@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snorkunking extends BasicGame {
-    public static int WIDTH = 700;
-    public static int HEIGHT = 700;
+    public static int WIDTH = 900;
+    public static int HEIGHT = 900;
     private int step; // To situate code to execute
     private Image fond, diver, title, blood, goldTreasure, money, enter, leftSideDiver, pad, rightIndication, leftIndication;
     private Music music1;
@@ -209,10 +209,18 @@ public class Snorkunking extends BasicGame {
     public void diverChoiceGame() {
         //jouer contre l'ordi//
         if (step12Diver.getX() > 465 * WIDTH / 700 && step12Diver.getX() < 605 * WIDTH / 700 && step12Diver.getY() > 455 * HEIGHT / 700 && step12Diver.getY() < 505 * HEIGHT / 700) {
+            try {
+                Thread.sleep(500);   }
+            catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();  }
             step = 4;
         }
         //jouer contre un autre joueur//
         if (step12Diver.getX() > 75 * WIDTH / 700 && step12Diver.getX() < 215 * WIDTH / 700 && step12Diver.getY() > 455 * HEIGHT / 700 && step12Diver.getY() < 505 * HEIGHT / 700) {
+            try {
+                Thread.sleep(500);   }
+            catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();  }
             step = 3;
         }
         //retourne au menu principal
@@ -389,120 +397,94 @@ public class Snorkunking extends BasicGame {
     int choice=0;
     public void action(GameContainer gc) {
         Input input = gc.getInput();
-        Diver currentPlayer = divers.get(turn);
         if (step==3){
-            if (input.isKeyPressed(Input.KEY_DOWN)) { // diver going down
-                currentPlayer.setY(currentPlayer.getY() + Level.HEIGHT);
-                 for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
-                    myOxygen.setValue(myOxygen.getValue() - 1);
-                 }
-                if (turn == 0)
-                     turn ++;
-                else turn--;
+            playerAction(gc);
+        }
+        if (step==4)
+        {
+            if (turn==0) {
+                playerAction(gc);
             }
-            if (input.isKeyPressed(Input.KEY_UP)) { // diver going down
-                currentPlayer.setY(currentPlayer.getY() - Level.HEIGHT);
-                for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
-                    myOxygen.setValue(myOxygen.getValue() - 1);
+            if (turn==1){
+                iaAction(gc);
+            }
+        }
+    }
+
+    public void playerAction(GameContainer gc){
+        Input input = gc.getInput();
+        Diver currentPlayer = divers.get(turn);
+        if (input.isKeyPressed(Input.KEY_DOWN)) { // diver going down
+            currentPlayer.setY(currentPlayer.getY() + Level.HEIGHT);
+            for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
+                myOxygen.setValue(myOxygen.getValue() - 1);
+            }
+            if (turn == 0)
+                turn ++;
+            else turn--;
+        }
+        if (input.isKeyPressed(Input.KEY_UP)) { // diver going down
+            currentPlayer.setY(currentPlayer.getY() - Level.HEIGHT);
+            for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
+                myOxygen.setValue(myOxygen.getValue() - 1);
+            }
+            if (turn == 0)
+                turn ++;
+            else turn--;
+        }
+        if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
+            for (int j = 0; j < myDivingArea.caves.size(); j++) {
+                for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
+                    for (int k = 0; k < myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++) {
+                        if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
+                            currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
+                            currentPlayer.setNbTreasures(currentPlayer.getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
+                            myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
+                            myOxygen.setValue(myOxygen.getValue() - 1);
+                        }
+                    }
                 }
-                if (turn == 0)
-                    turn ++;
-                else turn--;
             }
-            if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
+            if (turn == 0)
+                turn++;
+            else turn--;
+        }
+    }
+
+    public void iaAction(GameContainer gc){
+        if (myOxygen.getValue() >= iaStop / 2 ){
+            if(choice==1) {
                 for (int j = 0; j < myDivingArea.caves.size(); j++) {
                     for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
                         for (int k = 0; k < myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++) {
-                            if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
-                                currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
-                                currentPlayer.setNbTreasures(currentPlayer.getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
+                            if (divers.get(1).getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
+                                divers.get(1).diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
+                                divers.get(1).setNbTreasures(divers.get(1).getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
                                 myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
                                 myOxygen.setValue(myOxygen.getValue() - 1);
                             }
                         }
                     }
                 }
-                if (turn == 0)
-                    turn++;
-                else turn--;
+                choice=0;
+            }
+            else{
+                divers.get(1).setY(divers.get(1).getY() + Level.HEIGHT);
+                for (int i = 0; i < divers.get(1).getDiverChests().size() + 1; i++) { // diver's weight + movement
+                    myOxygen.setValue(myOxygen.getValue() - 1);
+                }
+                choice=1;
             }
         }
-        if (step==4)
-        {
-            if (turn==0) {
-                if (input.isKeyPressed(Input.KEY_DOWN)) { // diver going down
-                    currentPlayer.setY(currentPlayer.getY() + Level.HEIGHT);
-                    for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
-                        myOxygen.setValue(myOxygen.getValue() - 1);
-                    }
-                    if (turn == 0)
-                        turn++;
-                    else turn--;
-                }
-                if (input.isKeyPressed(Input.KEY_UP)) { // diver going down
-                    currentPlayer.setY(currentPlayer.getY() - Level.HEIGHT);
-                    for (int i = 0; i < currentPlayer.getDiverChests().size() + 1; i++) { // diver's weight + movement
-                        myOxygen.setValue(myOxygen.getValue() - 1);
-                    }
-                    if (turn == 0)
-                        turn++;
-                    else turn--;
-                }
-                if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
-                    for (int j = 0; j < myDivingArea.caves.size(); j++) {
-                        for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
-                            for (int k = 0; k < myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++) {
-                                if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
-                                    currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
-                                    currentPlayer.setNbTreasures(currentPlayer.getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
-                                    myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
-                                    myOxygen.setValue(myOxygen.getValue() - 1);
-                                }
-                            }
-                        }
-                    }
-                    if (turn == 0)
-                        turn++;
-                    else turn--;
-                }
+        else {
+            divers.get(1).setY(divers.get(1).getY() - Level.HEIGHT);
+            for (int i = 0; i < divers.get(1).getDiverChests().size() + 1; i++) { // diver's weight + movement
+                myOxygen.setValue(myOxygen.getValue() - 1);
             }
-            if (turn==1){
-                System.out.println("position joueur 2 : " + divers.get(1).getY());
-                if (myOxygen.getValue() >= iaStop / 2 ){
-                    if(choice==1) {
-                        for (int j = 0; j < myDivingArea.caves.size(); j++) {
-                            for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
-                                for (int k = 0; k < myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++) {
-                                    if (divers.get(1).getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
-                                        divers.get(1).diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
-                                        divers.get(1).setNbTreasures(divers.get(1).getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
-                                        myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
-                                        myOxygen.setValue(myOxygen.getValue() - 1);
-                                    }
-                                }
-                            }
-                        }
-                        choice=0;
-                    }
-                    else{
-                        divers.get(1).setY(divers.get(1).getY() + Level.HEIGHT);
-                        for (int i = 0; i < divers.get(1).getDiverChests().size() + 1; i++) { // diver's weight + movement
-                            myOxygen.setValue(myOxygen.getValue() - 1);
-                        }
-                        choice=1;
-                    }
-                }
-                else {
-                    divers.get(1).setY(divers.get(1).getY() - Level.HEIGHT);
-                    for (int i = 0; i < divers.get(1).getDiverChests().size() + 1; i++) { // diver's weight + movement
-                        myOxygen.setValue(myOxygen.getValue() - 1);
-                    }
 
-                }
-
-                turn--;
-            }
         }
+
+        turn--;
     }
 
     public void checkColision(){
