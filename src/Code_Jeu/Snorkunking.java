@@ -52,8 +52,8 @@ public class Snorkunking extends BasicGame {
         slowCoin = new Money(1);
         initMusicMenu();
         initImageMenu();
-        divers.add(new Diver(DivingArea.x+DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 1"));
-        divers.add(new Diver(DivingArea.x+2*DivingArea.WIDTH/3, DivingArea.y, 10*Level.WIDTH/100, Level.HEIGHT, "Player 2"));
+        divers.add(new Diver(DivingArea.x+DivingArea.WIDTH/3, DivingArea.y - Level.HEIGHT, 10*Level.WIDTH/100, Level.HEIGHT, "Player 1"));
+        divers.add(new Diver(DivingArea.x+2*DivingArea.WIDTH/3, DivingArea.y - Level.HEIGHT, 10*Level.WIDTH/100, Level.HEIGHT, "Player 2"));
 
     }
 
@@ -61,7 +61,7 @@ public class Snorkunking extends BasicGame {
     public void update(GameContainer gameContainer, int i) throws SlickException {
         step1(gameContainer); // Game presentation (title)
         step2(gameContainer); // Menu (chose 1 or 2 players)
-        step34(gameContainer);
+        game(gameContainer);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Snorkunking extends BasicGame {
         step1draw(graphics);
         step2draw(graphics);
         instructions(graphics, gameContainer);
-        step34draw(graphics);
+        drawGame(graphics);
 /*
         score.disp;
         oxygene.disp();
@@ -284,7 +284,7 @@ public class Snorkunking extends BasicGame {
     int turn =0;
     int phase = 1;
 
-    public void step34draw(Graphics graphics) throws SlickException {
+    public void drawGame (Graphics graphics) throws SlickException {
         if (step == 3 || step ==4 && phase <=3) {
             myOxygen.drawBottle(graphics);
             myDivingArea.drawLevels(graphics);
@@ -300,7 +300,7 @@ public class Snorkunking extends BasicGame {
         }
     }
 
-    public void step34(GameContainer gameContainer) {
+    public void game (GameContainer gameContainer) {
         Input input = gameContainer.getInput();
         if (step ==3 || step == 4) {
             music1.pause();
