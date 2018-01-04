@@ -13,7 +13,7 @@ public class ScorePanel {
     public static int HEIGHT = 14 * Snorkunking.HEIGHT / 100;
 
     public static void drawScorePanel()throws SlickException {
-        SCOREPANEL = new Image("res/image/diver.png");
+        SCOREPANEL = new Image("res/image/blocPlongeeModif.png");
         SCOREPANEL.draw(x, y, WIDTH, HEIGHT);
 
     }
