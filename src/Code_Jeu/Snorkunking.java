@@ -462,6 +462,7 @@ public class Snorkunking extends BasicGame {
                                 divers.get(1).setNbTreasures(divers.get(1).getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
                                 myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
                                 myOxygen.setValue(myOxygen.getValue() - 1);
+
                             }
                         }
                     }
