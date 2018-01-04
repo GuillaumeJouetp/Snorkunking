@@ -61,8 +61,7 @@ public class Snorkunking extends BasicGame {
     public void update(GameContainer gameContainer, int i) throws SlickException {
         step1(gameContainer); // Game presentation (title)
         step2(gameContainer); // Menu (chose 1 or 2 players)
-        step3(gameContainer); // Game with 2 player
-        step4(gameContainer); // Game with 1 player
+        step34(gameContainer);
     }
 
     @Override
@@ -71,8 +70,7 @@ public class Snorkunking extends BasicGame {
         step1draw(graphics);
         step2draw(graphics);
         instructions(graphics, gameContainer);
-        step3draw(graphics);
-        step4draw(graphics);
+        step34draw(graphics);
 /*
         score.disp;
         oxygene.disp();
@@ -285,9 +283,26 @@ public class Snorkunking extends BasicGame {
 
     int turn =0;
     int phase = 1;
-    public void step3(GameContainer gameContainer) {
+
+    public void step34draw(Graphics graphics) throws SlickException {
+        if (step == 3 || step ==4 && phase <=3) {
+            myOxygen.drawBottle(graphics);
+            myDivingArea.drawLevels(graphics);
+            myDivingArea.drawChests();
+            for (int i = 0; i <divers.size() ; i++) {
+                divers.get(i).drawDiver();
+            }
+            drawInfos(graphics);
+
+        }
+        if(phase >3){
+            drawEndGame();
+        }
+    }
+
+    public void step34(GameContainer gameContainer) {
         Input input = gameContainer.getInput();
-        if (step == 3) {
+        if (step ==3 || step == 4) {
             music1.pause();
             if (phase == 1) {
                 checkOxygeneLevel();
@@ -307,59 +322,6 @@ public class Snorkunking extends BasicGame {
         }
     }
 
-    public void step3draw(Graphics graphics) throws SlickException {
-        if (step == 3 && phase <=3) {
-            myOxygen.drawBottle(graphics);
-            myDivingArea.drawLevels(graphics);
-            myDivingArea.drawChests();
-            for (int i = 0; i <divers.size() ; i++) {
-                divers.get(i).drawDiver();
-            }
-            drawInfos(graphics);
-
-        }
-        if(phase >3){
-            drawEndGame();
-        }
-    }
-
-    public void step4(GameContainer gameContainer) {
-        Input input = gameContainer.getInput();
-        if (step == 4) {
-            music1.pause();
-            if (phase == 1) {
-                checkOxygeneLevel();
-                action(gameContainer);
-                checkColision();
-            } else if (phase == 2) {
-                checkOxygeneLevel();
-                action(gameContainer);
-                checkColision();
-            } else if (phase == 3) {
-                checkOxygeneLevel();
-                action(gameContainer);
-                checkColision();
-            } else {
-                endGame();
-            }
-        }
-    }
-
-    public void step4draw(Graphics graphics) throws SlickException {
-        if (step == 4 && phase <=3) {
-            myOxygen.drawBottle(graphics);
-            myDivingArea.drawLevels(graphics);
-            myDivingArea.drawChests();
-            for (int i = 0; i <divers.size() ; i++) {
-                divers.get(i).drawDiver();
-            }
-            drawInfos(graphics);
-
-        }
-        if(phase >3){
-            drawEndGame();
-        }
-    }
 
     public void checkOxygeneLevel() {
         if (myOxygen.getValue() <= 0) {
