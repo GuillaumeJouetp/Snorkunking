@@ -162,8 +162,7 @@ public class Snorkunking extends BasicGame {
 
     }
 
-    int iaStop = myOxygen.getValue();
-    int choice=0;
+
     public void action(GameContainer gc) {
         if (step==3){
             playerAction(gc);
@@ -234,11 +233,11 @@ public class Snorkunking extends BasicGame {
         if (input.isKeyPressed(Input.KEY_SPACE)) { // diver catching a chest (no care of weight)
             for (int j = 0; j < myDivingArea.caves.size(); j++) {
                 for (int i = 0; i < myDivingArea.caves.get(j).getNbLevels(); i++) {
-                    for (int k = 0; k < myDivingArea.caves.get(j).getLevels().get(i).getChests().size(); k++) {
-                        if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).y) {
-                            currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k));
-                            currentPlayer.setNbTreasures(currentPlayer.getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(k).getValue()); // update le score partiel que le joueur detient dans ses coffres
-                            myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(k);
+                    if( myDivingArea.caves.get(j).getLevels().get(i).getChests().size() > 0 ){
+                        if (currentPlayer.getY() == myDivingArea.caves.get(j).getLevels().get(i).getChests().get(0).y ) {
+                            currentPlayer.diverChests.add(myDivingArea.caves.get(j).getLevels().get(i).getChests().get(0));
+                            currentPlayer.setNbTreasures(currentPlayer.getNbTreasures() + myDivingArea.caves.get(j).getLevels().get(i).getChests().get(0).getValue()); // update le score partiel que le joueur detient dans ses coffres
+                            myDivingArea.caves.get(j).getLevels().get(i).getChests().remove(0);
                             myOxygen.setValue(myOxygen.getValue() - 1);
                         }
                     }
@@ -264,6 +263,9 @@ public class Snorkunking extends BasicGame {
         }
 
     }
+
+    int iaStop = myOxygen.getValue();
+    int choice=0;
 
     public void iaAction(GameContainer gc){
         if (myOxygen.getValue() >= iaStop / 2 ){
