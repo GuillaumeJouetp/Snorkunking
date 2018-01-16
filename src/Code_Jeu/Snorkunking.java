@@ -104,16 +104,6 @@ public class Snorkunking extends BasicGame {
     }
 
     public void choseMenu() { //choisir options de jeu
-/*
-        Image instructionsBuble = new Image("res/image/instructionsBuble.png");
-        instructionsBuble.draw(435 * WIDTH / 700, 435 * HEIGHT / 700, 20 * WIDTH / 70, 10 * HEIGHT / 70);
-        Image backToTitleBuble = new Image("res/image/backToTitleBuble.png");
-        backToTitleBuble.draw(55 * WIDTH / 700, 435 * HEIGHT / 700, 20 * WIDTH / 70, 10 * HEIGHT / 70);
-        Image versusIABuble = new Image("res/image/versusIABuble.png");
-        versusIABuble.draw(435 * WIDTH / 700, 125 * HEIGHT / 700, 20 * WIDTH / 70, 10 * HEIGHT / 70);
-        Image versusPlayerBuble = new Image("res/image/versusPlayerBuble.png");
-        versusPlayerBuble.draw(45 * WIDTH / 700, 125 * HEIGHT / 700, 20 * WIDTH / 70, 10 * HEIGHT / 70);
-        */
         //lance les instructions
         if (step12Diver.getX() > 435 * WIDTH / 700 && step12Diver.getX() < 635 * WIDTH / 700 && step12Diver.getY() > 435 * HEIGHT / 700 && step12Diver.getY() < 535 * HEIGHT / 700) {
             /*

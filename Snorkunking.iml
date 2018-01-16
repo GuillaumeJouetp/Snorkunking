@@ -18,7 +18,6 @@
         <jarDirectory url="file://$MODULE_DIR$/slick/lib" recursive="false" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="stdlib-package" level="project" />
     <orderEntry type="library" name="slick" level="project" />
     <orderEntry type="module-library">
       <library>
