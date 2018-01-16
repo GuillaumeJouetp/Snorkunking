@@ -1,9 +1,9 @@
-Les ressources du projet ainsi que le contre rendu du projet se trouvent dans le dossier res
-le code source su projet se trouve dans le dossier src
+Les ressources du projet ainsi que le contre rendu du projet se trouvent dans le dossier res.
+le code source du projet se trouve dans le dossier src.
 
-Pour executer le programme indépendament de tout IDE ou de toute librairie a installer sur celui-ci :
+Pour executer le programme indÃ©pendament de tout IDE ou de toute librairie a installer sur celui-ci :
  - ouvrir l'invite de commande 
- - cd pathToProject/Snorkunking/out/artifacts/Snorkunking_jar (chemin ver le jar exécutable)
+ - cd pathToProject/Snorkunking/out/artifacts/Snorkunking_jar (chemin ver le jar exï¿½cutable)
 
 Puis executer cette commande pour executer le jar :
  - Sous Linux / Mac  : java -jar -Djava.library.path=slick Snorkunking.jar
